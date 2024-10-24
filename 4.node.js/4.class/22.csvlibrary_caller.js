@@ -12,5 +12,8 @@ const filePath = "hello3.csv";
 writeCSV(filePath, sampleData);*/
 
 readCSV(filePath, (data) => {
+  if (err) {
+    console.log("파일 ");
+  }
   console.log("파일 내의 결과는: ".data);
 });
