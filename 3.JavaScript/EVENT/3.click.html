@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="myButton">클릭 미</button>
+    <script>
+      //window.onload=함수(){};
+      //window.onliad=()=>{};
+
+      function buttonAction() {
+        console.log("버튼 클릭됨");
+      }
+
+      const button = document.getElementById("myButton");
+      console.log(button);
+      button.addEventListener("click", buttonAction);
+
+      button.addEventListener("click", () => {
+        console.log("버튼 클리됨");
+      });
+
+      //이정도까지 줄일 수 있고, 줄여야 속도가 빨라짐
+      document.getElementById("myButton").addEventListener("click", () => {
+        console.log("버튼 클릭됨");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Signup</title>
+    <style>
+      body {
+        background-image: url("../../image/main.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        display: flex;
+        gap: 50px;
+      }
+
+      .box {
+        width: 300px;
+        padding: 20px;
+        border-radius: 25px;
+        background-color: rgba(255, 255, 255, 0.8);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .login .box-title,
+      .signup .box-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      input[type="email"],
+      input[type="password"],
+      input[type="text"] {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #a764ff;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #8a53d4;
+      }
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Login Box -->
+      <div class="box login">
+        <div class="box-title">Login</div>
+        <form>
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <div class="checkbox-container">
+            <input type="checkbox" />
+            <label for="remember">로그인 정보저장</label>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <!-- Signup Box -->
+      <div class="box signup">
+        <div class="box-title">Signup</div>
+        <form>
+          <input type="text" placeholder="Username" required />
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+          <button type="submit">Signup</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

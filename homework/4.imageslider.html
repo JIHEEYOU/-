@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="slide1"><img src="../image/cat1.jpg" alt="cat1.jpg" /></div>
+    <div id="slice2"><img src="../image/cat2.jpg" alt="cat2.jpg" /></div>
+    <div id="slice3"><img src="../image/cat3.jpg" alt="cat3.jpg" /></div>
+
+    <div>
+      <button id="previous">Previous</button>
+      <button id="Next">Next</button>
+    </div>
+    <script>
+      function moveSlide(event) {
+        event.preventDefault();
+        if (event.target.className === "next") {
+          if (currentIdx === slideLis.length - 1) return;
+          currentIdx++;
+          translate += -liWidth;
+          slider.style.left = `${translate}px`;
+        } else {
+          if (currentIdx === 0) return;
+          currentIdx--;
+          translate += liWidth;
+          slider.style.left = `${translate}px`;
+        }
+      }
+
+      //이정도까지 줄일 수 있고, 줄여야 속도가 빨라짐
+      const button1 = document
+        .getElementById("previous")
+        .addEventListener("click", () => {
+          console.log("버튼 클릭됨");
+          button.addEventListener("click", buttonAction);
+        });
+
+      const button2 = document
+        .getElementById("Next")
+        .addEventListener("click", () => {
+          console.log("버튼 클릭됨");
+          button.addEventListener("click", buttonAction);
+        });
+    </script>
+  </body>
+</html>

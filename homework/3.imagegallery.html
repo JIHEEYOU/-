@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        .cat{
+            width:"200px";
+            height:"200px";
+        }
+
+        #selectImage{
+            width:"500%";
+            height:"500%";
+            display: none; /* 초기에는 안 보이게 설정 */
+        }
+
+        #selectImageContainer{
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Image Gallery</h1>
+    <table>
+        <tr></tr>
+            <th><img class= "cat" src="../image/cat1.jpg" alt="고양이사진1" onclick="clickImage('../image/cat1.jpg')" /></th>
+            <th><img class= "cat" src="../image/cat2.jpg" alt="고양이사진2" onclick="clickImage('../image/cat2.jpg')"/></th>
+            <th><img class= "cat" src="../image/cat3.jpg" alt="고양이사진3" onclick="clickImage('../image/cat3.jpg')" /></th>
+        </tr>
+    </table>
+
+        <div id="selectImageContainer">
+            <img id="selectImage" src="" alt="선택한 이미지">
+        </div>
+   
+    <script>
+        function clickImage(imageSrc) {
+            const selectImage=document.getElementById("selectImage");
+            selectImage.src=imageSrc;
+            console.log("이미지 선택");
+            // 큰 이미지 표시 (display를 'block'으로 설정하여 보여줌)
+            selectImage.style.display = "block";
+            console.log("이미지 확대");
+          }
+    </script>
+  </body>
+</html>

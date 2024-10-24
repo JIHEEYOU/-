@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      /*table {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      td {
+        border: 1px solid black;
+      }*/
+    </style>
+  </head>
+  <body>
+    <table border="1">
+      <tr>
+        <th>셀1</th>
+        <th>셀2</th>
+        <th>셀3</th>
+      </tr>
+      <tr>
+        <th>셀4</th>
+        <th>셀5</th>
+        <th>셀6</th>
+      </tr>
+      <tr>
+        <th>셀7</th>
+        <th>셀8</th>
+        <th>셀9</th>
+      </tr>
+    </table>
+
+    <button onclick="changeCellColor()">셀 색상 변경</button>
+    <button onclick="changeOddCellColor()">홀수셀 색상 변경</button>
+
+    <script>
+      function changeCellColor2() {
+        var table = document.getElementsByName("table");
+        for (var i = 0; i < cells.length; i++) {
+          cells[i].style.backgroundColor = "lightblue";
+        }
+      }
+      function changeOddCellColor2() {
+        var cells = document.getElementsByTagName("td");
+        for (var i = 0; i < cells.length; i++) {
+          cells[i % 2 == 0].style.backgroundColor = "lightgreen";
+        }
+      }
+
+      function changeCellColor() {
+        const cells = document.querySelectorAll("table th");
+
+        // 셀의 배경색을 lightblue로 변경
+        cells.forEach((cell) => {
+          cell.style.backgroundColor = "lightblue";
+        });
+      }
+      function changeOddCellColor() {
+        // 모든 테이블 셀(th) 선택
+        const cells = document.querySelectorAll("table th");
+
+        // 홀수 번째 셀만 배경색 변경 (1, 3, 5...)
+        cells.forEach((cell, index) => {
+          if (index % 2 === 0) {
+            // index는 0부터 시작하므로 짝수는 시각적으로 홀수 셀이 됨
+            cell.style.backgroundColor = "lightgreen";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

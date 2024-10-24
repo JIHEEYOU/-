@@ -1,0 +1,6 @@
+window.addEventListener("scroll", function () { console.log("페이지 스크롤됨");
+const scrollPostion = window.pageYOffset; console.log(`현재위치 :
+${scrollPostion}`); const scrollPostion2 = document.documentElement.scrollTop;
+console.log(`현재위치2: ${scrollPostion2}`); const scrollPostion3 =
+window.pageYOffset || document.documentElement.scrollTop;
+console.log(`현재위치3: ${scrollPostion2}`); });

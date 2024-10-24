@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script>
+      let num = 0;
+      console.log(num);
+      function number_inc() {
+        console.log("숫자 증가시키기");
+        num++;
+        document.getElementById("num").textContent = num;
+      }
+      function number_dec() {
+        console.log("숫자 감소시키기");
+        num--;
+        document.getElementById("num").textContent = num;
+      }
+    </script>
+  </head>
+  <body>
+    <h1>버튼월드</h1>
+    <div id="num">0</div>
+    <div>
+      <button onclick="number_inc()">+1</button>
+      <button onclick="number_dec()">-1</button>
+    </div>
+  </body>
+</html>

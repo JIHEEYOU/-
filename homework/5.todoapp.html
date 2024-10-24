@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <h1>To-Do List</h1>
+  </head>
+  <body>
+    <input id="todo" type="text" placeholder="New to-do" />
+    <button>Add</button>
+    <ul>
+      <li>자바스크립트 코딩 공부</li>
+      <li>코딩테스트 준비</li>
+      <li>낮잠자기</li>
+    </ul>
+
+    <script>
+      function addlist() {
+        const addValue = document.getElementById("addValue").value;
+
+        const todo = document.getElementById("todo").value;
+        document.getElementById("result").innerHTML = todo;
+      }
+    </script>
+  </body>
+</html>

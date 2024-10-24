@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .dragitem {
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        margin: 50px;
+      }
+
+      #dragItem1 {
+        background-color: yellow;
+      }
+
+      #dragItem2 {
+        background-color: pink;
+      }
+
+      #dragItem3 {
+        background-color: aquamarine;
+      }
+
+      #dropZone {
+        max-width: 300%;
+        min-height: 200px;
+        margin-top: 50px;
+        border: 2px dashed gray;
+        background-color: lightgray;
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dragItem1" class="dragItem dragItem1" draggable="true">
+      Drag Me1
+    </div>
+    <div id="dragItem2" class="dragItem dragItem2" draggable="true">
+      Drag Me2
+    </div>
+    <div id="dragItem3" class="dragItem dragItem3" draggable="true">
+      Drag Me3
+    </div>
+    <div id="dropZone">Drop here</div>
+
+    <script>
+      const dragItems = document.querySelectorAll(".dragItem");
+      const dragZone = document.getElementById("dropZone");
+
+      dragItems.forEach((dragItem) => {
+        dragItem.addEventListener("dragstart", () => {
+          console.log("드래그 시작중..");
+          event.dataTransfer.setData("text", event.target.id);
+        });
+      });
+
+      const dragItem1 = document.getElementById("dragItem1");
+      const dragItem2 = document.getElementById("dragItem2");
+      const dragItem3 = document.getElementById("dragItem3");
+      const dropZone = document.getElementById("dropZone");
+
+      dragItem1.addEventListener("dragstart", (event) => {
+        console.log("드래그 시작 중");
+        event.dataTransfer.setData("text", event.target.id); // 이벤트 객체를 매개변수로 받아 사용
+      });
+
+      dragItem2.addEventListener("dragstart", (event) => {
+        console.log("드래그 시작 중");
+        event.dataTransfer.setData("text", event.target.id); // 이벤트 객체를 매개변수로 받아 사용
+      });
+
+      dragItem3.addEventListener("dragstart", (event) => {
+        console.log("드래그 시작 중");
+        event.dataTransfer.setData("text", event.target.id); // 이벤트 객체를 매개변수로 받아 사용
+      });
+
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault(); // 드롭이 가능하도록 기본 동작 방지
+        console.log("이 개체 위에 무언가 올라옴");
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault(); // 드롭이 가능하도록 기본 동작 방지
+        console.log("드롭 발생");
+        const data = e.dataTransfer.getData("text"); // event 대신 e로 변경
+        const draggedElement = document.getElementById(data); // 드래그된 요소의 ID 가져옴
+        dropZone.appendChild(draggedElement); // 드래그된 요소만 추가
+
+        currentWidth += 100;
+        dropZone.style.width = currentWidth + "px";
+
+        // DOM 트리 구조상, 멀티 parent를 가질 수 없음.. 그래서 appendChild 하면??인전에서 떨어짐.
+        // 글자를 가지고 알아서 안에 배치 // div 안에 div를 넣어라
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //window.onload=함수(){};
+      //window.onliad=()=>{};
+
+      //window.onload() => {
+      //    console.log("모든 리소스(HTML/CSS/IMAGE 등)가 다 로딩됨 #1")
+      // }
+      document.addEventListener("DOMContentLoaded", () => {
+        //DOM이 로딩이 되었을 때다.
+        //그말인즉, CSS라던지, Image라던지, 이런 실제 모든 컨텐츠는 로딩되었다고 보장할 수 없음
+        console.log("DOM이 완전히 로딩되었음...");
+      });
+    </script>
+  </body>
+</html>
