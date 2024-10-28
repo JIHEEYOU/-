@@ -30,15 +30,14 @@ for (let i = 0; i < 10; i++) {
 function generateBirthdate() {
   //yyyy-mm-dd 포멧으로 반환하기
   //YY-MM-DD로 맞출 수 잇는지 고민해보기
-  const year = Math.floor(Math.random() * (2010 - 1960 + 1)) + 1960;
-  const year = getRandomInRange(1960, 2010);
-
-  const month = getRandomInRange(1, 12);
+  //const year = Math.floor(Math.random() * (2010 - 1960 + 1)) + 1960;
+  //const month = getRandomInRange(1, 12);
   const month = Math.floor(Math.random() * 12) + 1;
 
-  const day = Math.floor(Math.random() * 28) + 1; //1~28일까지가 나옴
+  const year = Math.floor(Math.random() * (2010 - 1960 + 1)) + 1960;
+  //const day = Math.floor(Math.random() * 28) + 1; //1~28일까지가 나옴
 
-  return `${year}-${month}-${day}`;
+  return `${getRandomInRange(1960, 2010)}-${month}-${day}`;
 }
 
 function generateAddress() {
@@ -48,27 +47,78 @@ function generateAddress() {
   return `${street} ${city}`;
 }
 
-for (let i = 0; i < 10; i++) {
+const userdb = [];
+
+for (let i = 0; i < 100; i++) {
   //console.log(generateName(),generateGender());
-  console.log(
+  userdb.push(
     generateYYYY(),
     generateGender(),
     generateBirthdate(),
-    generateAddress
+    generateAddress()
   );
 }
+
+//db에 있는 내용
+for (const user of userdb) {
+  console.log(user);
+}
+console.log(userdb);
 
 function generateYYYY() {
   //1960~2010 이런걸 하려면?
   let year = 0;
 
-  //while (true) {
-  // year = Math.floor(Math.random() * 10000);
-  //if (year >= 1960 && year <= 2010) {
+  while (true) {
+  year = Math.floor(Math.random() * 10000);
+  if (year >= 1960 && year <= 2010) {
   //break;
   //}
 }
 
+console.log(userdb);
+
 year = Math.floor(Math.random() * (2010 - 1960 + 1));
 
+for (let i = 0; i < 100; i++) {
+  userdb.push([
+    generateName(),
+    generateGender(),
+    generateBirthdate(),
+    generateAddress(),
+  ]);
+}
+
+//db에 있는 내용
 return year;
+
+for (const user of userdb) {
+  console, log(user);
+}
+
+//csv형태로, 파일 저장하시오
+//user.csv
+
+const fs=require('fs');
+
+function writeDataToCSV(data,filePath){
+    const header=["Name","Birthdate","Gender","Address"]
+    const rows=data.map(row=>row.join(","));
+    const csvContent=[header, ...rows].join('\n');
+
+    fs.writeFileSync(filePath, csvContent,'utf8');
+}
+
+writeDataToCSV(userdb,"user.csv");
+//--여기서부터틀 상점--//
+class NameGenerator{
+
+
+}
+class User{
+
+
+
+}
+
+//--여기서부터는 아이템--//
