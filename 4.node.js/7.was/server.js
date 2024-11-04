@@ -46,8 +46,9 @@ const timer = setTimeout(() => {
   server.close();
 }, 10000);
 
-const readline = require("readline");
-const r1 = readline.createInterface({
+// const readline = require("readline");
+import readline from "readline";
+const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });

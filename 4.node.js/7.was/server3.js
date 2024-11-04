@@ -1,9 +1,9 @@
-const http = require("http");
-const fs = require("fs");
+import http from "http";
+import fs from "fs";
 
 http
   .createServer((req, res) => {
-    fs.readFile(".index.html/", (err, data) => {
+    fs.readFile(".index2.html/", (err, data) => {
       if (err) {
         console.log(err);
         res.end("오류가 발생했습니다: ", err.message);

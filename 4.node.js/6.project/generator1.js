@@ -29,5 +29,5 @@ for (let i = 0; i < 100; i++) {
 }
 const header = ["Id", "Name", "Gender", "Age", "Birthdate", "Address"];
 
-writeDataToCSV(userdb, "user.csv", header);
+writeDataToCSV(userdb, "./user.csv", header);
 console.log("Data has been written to user.csv");

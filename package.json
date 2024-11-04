@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "papaparse": "^5.4.1",
     "prompt-sync": "^4.2.0"
   }
 }
