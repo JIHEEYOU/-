@@ -1,2 +1,2 @@
-export const cafeBrand = ["카페베네", "스타벅스", "투썸", "이디야", "커피빈"];
-export const JijumName = ["용산", "신촌", "강남", "잠실", "노원"];
+export const lastname = ["박", "김", "이", "조", "최"];
+export const firstname = ["가", "나", "다", "라", "마"];
