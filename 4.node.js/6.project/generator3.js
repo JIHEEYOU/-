@@ -5,41 +5,30 @@ import generateOrderAt from "./generator/generateOrderAt.js";
 import getRandomInRange from "./generator/getRandomInRange.js";
 import writeDataToCSV from "./generator/writeDataToCSV.js";
 
-const cafeBrand = [
-  "카페베네",
-  "스타벅스",
-  "투썸",
-  "이디야",
-  "커피빈",
-  "빽다방",
-  "메가커피",
-  "컴포즈",
-  "할리스",
-  "공차",
-];
-const JijumName = [
-  "용산",
-  "신촌",
-  "강남",
-  "잠실",
-  "노원",
-  "성수",
-  "익선",
-  "한남",
-  "망원",
-  "성수",
-];
-
 getRandomInRange();
 
-f;
-
-for (let i = 0; i < 100; i++) {
-  const getcf = generateName();
-  storedb.push([generateId(), getcf[0], getcf[1], generateRoad()]);
-}
-
+const fs = require("fs");
+const util = require("util");
+const path = require("path");
+const FILE_NcAME = "user.csv";
 const orderdb = [];
+
+fs.readFile("./users.csv", "utf-8", (err, Id) => {
+  const rowToId = Id.split("\n");
+  const Id2Key = rowToId[0].split(",");
+  const postArray = [];
+  const userArray = [];
+  const userPostArray = [];
+
+  for (let j = 0; j < rowToId.length - 1; j++) {
+    const dataObject = {};
+    for (let i = 0; i < rowToId.length - 1; i++) {
+      dataObject[Id2Key[i]] = rowToId[j + 1].split(",")[i];
+      ㄴ;
+    }
+    userArray.push(dataObject);
+  }
+});
 
 for (let i = 0; i < 100; i++) {
   orderdb.push([generateId(), generateOrderAt()]);
