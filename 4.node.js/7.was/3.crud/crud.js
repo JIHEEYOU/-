@@ -12,9 +12,9 @@ const server = http.createServer((req, res) => {
   } else if (req.method === "POST") {
     handlePostRequest(req, res);
   } else if (req.method === "PUT") {
-    handlePostRequest(req, res);
+    handlePutRequest(req, res);
   } else if (req.method === "DELETE") {
-    handlePostRequest(req, res);
+    handleDeleteRequest(req, res);
   } else {
     res.writeHead(404);
     res.end("Not Found");
@@ -22,24 +22,40 @@ const server = http.createServer((req, res) => {
 });
 
 async function handleGetRequest(req, res) {
-  if (req / url === "/") {
+  if (req.url === "/") {
     const data = await fs.readFile("./index.html");
-    res.end("GET요청/ 응답완료");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.end(data);
   } else if (req.url === "/about") {
-    res.end("GET요청/ 응답완료");
+    const data = await fs.readFile("./about.html");
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.end(data);
   } else if (req.url === "/user") {
     res.writeHead(200, { "Content-Type": "application/json;charset=utf-8" });
     res.end(JSON.stringify(users));
+  } else if (req.url.startsWith("/image/")) {
+    const imageName = path.basename(req.url); // "cat2.jpg"
+    // 아래 경로를 실제 이미지가 있는 경로로 수정
+    const imagePath = path.join(__dirname, "static", imageName); // 'static' 폴더가 crud.js와 같은 위치에 있어야 함
+    try {
+      const imageData = await fs.readFile(imagePath); // 이미지 파일 읽기
+      res.writeHead(200, { "Content-Type": "image/jpeg" });
+      res.end(imageData); // 이미지 데이터 응답
+    } catch (error) {
+      console.error("이미지 파일을 찾을 수 없습니다:", error); // 오류 로그 추가
+      res.writeHead(404);
+      res.end("Image Not Found");
+    }
   } else {
     res.writeHead(404);
-    res.end("NotFound");
+    res.end("Not Found");
   }
 }
 
 function handlePostRequest(req, res) {
   if (req.url === "/user") {
     let body = "";
-    req.on("data", (dat) => (body += data));
+    req.on("data", (data) => (body += data));
     //req.on('data',function readData(data))
 
     req.on("end", function name() {
@@ -62,12 +78,36 @@ function handlePostRequest(req, res) {
   //return res.end("Post요청 응답완료");
 }
 
+function handleDeleteRequest(req, res) {
+  if (req.url === "/user") {
+    let body = "";
+    req.on("data", (data) => (body += data));
+
+    return req.on("end", () => {
+      if (req.headers["content-type"] === "application/json") {
+        const parsedData = JSON.parse(body);
+        const username = parsedData.name;
+        // users[username] = "";
+        delete users[username];
+        return res.end(
+          `application/json 삭제성공,
+            users: ${JSON.stringify(users)}`
+        );
+      } else {
+        res.writeHead(404);
+        return res.end("모르는 타입임");
+      }
+    });
+  }
+}
+
 function handlePutRequest(req, res) {
   res.end("Put요청 응답완료");
 }
 function handleDeleteRequest(req, res) {
   res.end("Delete요청 응답완료");
 }
+
 server.listen(3000, () => {
   console.log("서버가 3000포트에서 대기 중입니다");
 });
