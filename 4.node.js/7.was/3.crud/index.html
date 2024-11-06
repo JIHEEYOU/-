@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>About</title>
   </head>
   <body>
     <nav>
@@ -11,68 +11,26 @@
       <a href="/about">About</a>
       <a href="/user">User</a>
     </nav>
+
     <section>
-      <h2>Hello Node!</h2>
-      <p>Hello Server!</p>
-    </section>
-    <section>
-      <h2>Users</h2>
+      <h2>User Registration</h2>
       <form id="form">
-        <input type="text" id="username" placeholder="Enter username" />
+        <input
+          type="text"
+          id="username"
+          placeholder="Enter username"
+          required
+        />
         <button type="submit">Submit</button>
       </form>
-      <!-- 여기에 사용자 목록 출력할 div 영역 -->
+    </section>
+
+    <section>
+      <h2>Users</h2>
       <div id="userTable"></div>
     </section>
-    <!--<script src="static.user.js"></script>-->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        console.log("나의 JS코드");
 
-        const userTable = document.getElementById("userTable");
-        const form = document.getElementById("form");
-
-        // form submit 시 POST 요청으로 데이터 전송
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const username = document.getElementById("username").value;
-
-          fetch("/user", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name: username }), // 데이터 전송
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log("POST 요청 성공:", data);
-              document.getElementById("username").value = ""; // 입력 필드 초기화
-            })
-            .catch((error) => console.error("POST 요청 실패:", error));
-        });
-
-        // 서버에서 사용자 목록 가져오기
-        fetch("/user", {
-          method: "GET",
-        })
-          .then((response) => {
-            if (response.ok) {
-              console.log("성공");
-              return response.json();
-            } else {
-              console.log("에러");
-            }
-          })
-          .then((data) => {
-            console.log(data);
-            // 사용자 데이터를 화면에 표시
-            userTable.innerHTML = Object.keys(data)
-              .map((username) => `<p>${username}</p>`)
-              .join("");
-          })
-          .catch((error) => console.error("GET 요청 실패:", error));
-      });
-    </script>
+    <!-- user.js 파일을 static 폴더에서 불러옵니다. -->
+    <script src="/static/user.js"></script>
   </body>
 </html>
