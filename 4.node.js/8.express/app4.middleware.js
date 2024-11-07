@@ -39,6 +39,7 @@ app.get("/about", mymiddle1, mymiddle2, (req, res) => {
 });
 
 app.get("/error", (req, res) => {
+  메ㅔ;
   throw new Error("강제로 에러 유발");
 });
 

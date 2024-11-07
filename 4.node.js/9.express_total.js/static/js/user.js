@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-<script src="/static/user.js"></script>;
-
 // 사용자 등록 함수
 function registerUser(name) {
   fetch("/user", {

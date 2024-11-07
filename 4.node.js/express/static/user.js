@@ -1,14 +1,12 @@
-// user.js
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
   const username = document.getElementById("username");
 
-  updateUsers(); // 기존에 등록된 사용자 업데이트
-
+  updateUsers();
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const name = username.value;
 
+    const name = username.value;
     if (!name) {
       alert("이름을 입력하세요");
       return;
@@ -18,9 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-<script src="/static/user.js"></script>;
-
-// 사용자 등록 함수
 function registerUser(name) {
   fetch("/user", {
     method: "POST",
@@ -30,71 +25,90 @@ function registerUser(name) {
     .then((response) => {
       if (response.ok) {
         alert("등록 성공");
-        username.value = ""; // 성공하면 입력 필드 초기화
-        updateUsers(); // 새로고침하여 사용자 업데이트
+        username.value = "";
+        updateUsers();
       } else {
         alert("등록 실패");
       }
     })
     .catch((error) => {
-      alert(`등록 중 오류 발생: ${error.message}`);
+      alert("등록 중에 오류가 발생했습니다.", error.message);
     });
 }
 
-// 사용자 목록 업데이트 함수
 function updateUsers() {
+  const userTable = document.getElementById("userTable");
+  userTable.innerHTML = ``;
+
+  // GET /user
   fetch("/user")
     .then((response) => response.json())
     .then((users) => {
-      const userTable = document.getElementById("userTable");
-      userTable.innerText = ""; // 테이블 초기화
-
       if (Object.keys(users).length === 0) {
-        const noUsersMessage = document.createElement("div");
-        noUsersMessage.innerText = "등록된 사용자가 없습니다";
-        userTable.appendChild(noUsersMessage);
+        const row = document.createElement("div");
+        row.textContent = "등록된 사용자가 없습니다.";
+        userTable.appendChild(row);
       } else {
         for (const key in users) {
           const row = document.createElement("div");
           row.innerText = `ID: ${key}, Name: ${users[key]}`;
 
-          // 수정 버튼 추가
           const modifyButton = document.createElement("button");
           modifyButton.textContent = "수정";
+          modifyButton.addEventListener("click", () => {
+            modifyUsers(key);
+          });
           row.appendChild(modifyButton);
 
-          // 삭제 버튼 추가
           const deleteButton = document.createElement("button");
           deleteButton.textContent = "삭제";
-          deleteButton.addEventListener("click", () => deleteUser(key));
+          deleteButton.addEventListener("click", () => {
+            deleteUsers(key);
+          });
           row.appendChild(deleteButton);
 
-          // 테이블에 행 추가
           userTable.appendChild(row);
         }
       }
-    })
-    .catch((error) => {
-      console.error("사용자를 불러오는 데 실패하였습니다.", error.message);
-      alert("사용자 로딩 오류");
     });
 }
 
-// 사용자 삭제 함수
-function deleteUser(userId) {
+function deleteUsers(userId) {
   fetch(`/user/${userId}`, {
     method: "DELETE",
   })
     .then((response) => {
       if (response.ok) {
-        alert("삭제 성공");
-        updateUsers(); // 성공 시 목록 업데이트
+        // alert("삭제 성공");
+        updateUsers();
       } else {
         alert("삭제 실패");
       }
     })
     .catch((error) => {
-      console.error("삭제 중 오류 발생", error.message);
+      console.error("삭제 중 오류?", error.message);
       alert("삭제 중 오류가 발생했습니다.");
+    });
+}
+
+function modifyUsers(userId) {
+  const newName = prompt("수정할 이름을 입력하세요.");
+  if(newName !== null){
+    fetch(`/user/${userId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "text/plain; charset=utf-8" },
+      body: JSON.stringify({name:newName}),
+    })
+  .then(response => {
+      if (response.ok) {
+        alert("수정 성공");
+        updateUsers();//화면갱신
+      } else {
+        alert("수정 실패");
+      }
+    })
+    .catch((error) => {
+      console.error("수정 중 오류 발생", error);
+      alert("수정 중 오류가 발생했습니다.");
     });
 }

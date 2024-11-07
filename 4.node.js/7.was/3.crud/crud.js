@@ -34,13 +34,6 @@ async function handleGetRequest(req, res) {
     if (req.url === "/") {
       const data = await fs.readFile("./index.html");
       res.end(data);
-      // 1
-      // try {
-      //   const data = await fs.readFile("./index.html");
-      // } catch (err) {}
-
-      // 2
-      // readFileAndSendResponse("./index.html"); // 함수 내에서 try-catch를 사용, 리팩토링
     } else if (req.url === "/about") {
       const data = await fs.readFile("./about.html");
       res.end(data);
