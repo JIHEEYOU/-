@@ -1,0 +1,16 @@
+<!-- views/fruits.html -->
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <h1>{{ menubar }}</h1>
+    <ul>
+      {% for fruit in fruits %}
+      <li>{{ fruit }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
