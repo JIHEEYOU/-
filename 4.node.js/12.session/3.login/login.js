@@ -36,6 +36,23 @@ function logout() {
   });
 }
 
+async function checkLoginStatusAsyncAwait() {
+  try {
+    const response = await fetch("/check-login");
+    const data = await response.data;
+
+    if (data && data.username) {
+      console.log(data.name);
+      showProfile(data.username);
+    } else {
+      showLoginForm();
+      showLoginForm();
+    }
+  } catch {
+    console.log("로그인 안 된 사용자였음");
+  }
+}
+
 function login(e) {
   e.preventDefault();
   const username = document.getElementById("username").value;
