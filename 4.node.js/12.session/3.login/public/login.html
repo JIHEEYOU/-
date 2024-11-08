@@ -41,15 +41,22 @@
   </head>
   <body>
     <h1>Login</h1>
-    <form action="/login" method="post">
-      <label for="username">Username:</label>
-      <input type="text" id="username" name="username" required />
-      <br />
-      <label for="password">password</label>
-      <input type="password" id="password" name="password" required />
-      <br />
-      <input type="submit" id="loginButton" value="로그인" />
-    </form>
+    <div id="loginFormContainer">
+      <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <br />
+        <label for="password">password</label>
+        <input type="password" id="password" name="password" required />
+        <br />
+        <input type="submit" id="loginButton" value="로그인" />
+      </form>
+    </div>
+
+    <div id="profile" style="display: none">
+      <h2>안녕하세요, <span id="usernameSpan"></span>님!!</h2>
+      <button id="logoutbutton">Logout</button>
+    </div>
     <script src="/static/login.js"></script>
   </body>
 </html>

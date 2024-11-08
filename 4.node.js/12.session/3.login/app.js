@@ -15,6 +15,9 @@ app.use(
     secret: "my-secret-key", //내 메모리에 저장할 데이터의 암호화키
     resave: false, //세션 데이터가 변경되지 않았어도 계속 재저장할거냐
     saveUninitialized: true, //초기화되지 않은 세션을 저장소에 저장할거냐
+    cookie: {
+      maxAge: 60000, //세션의 유효시간을 60초=1분
+    },
   })
 );
 
@@ -80,6 +83,16 @@ app.get("/logout", (req, res) => {
   //세션에서 사용자 정보를 삭제. 어떻게?찾아본다
   /*req.session.destroy();
   res.json({ message: "로그아웃성공" });*/
+});
+
+app.get("check-login", (req, res) => {
+  //세션 체크해서 사용자에게 username 반납
+  const user = req.session.user;
+  if (user) {
+    res.json({ username: user.username });
+  } else {
+    res.status(401).json({ message: "로그인 안됨" });
+  }
 });
 
 app.listen(port, () => {
