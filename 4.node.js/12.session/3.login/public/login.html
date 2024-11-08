@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 페이지</title>
+    <style>
+      nav {
+        background-color: #f2f2f2;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav li {
+        float: left;
+      }
+
+      nav a {
+        display: block;
+        padding: 14px 16px;
+        color: #333;
+        text-decoration: none;
+      }
+      nav a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+    </style>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </nav>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <br />
+      <label for="password">password</label>
+      <input type="password" id="password" name="password" required />
+      <br />
+      <input type="submit" id="loginButton" value="로그인" />
+    </form>
+    <script src="/static/login.js"></script>
+  </body>
+</html>
