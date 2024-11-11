@@ -1,7 +1,21 @@
 {
   "type": "commonjs",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "nunjucks": "^3.2.4",
     "papaparse": "^5.4.1",
     "prompt-sync": "^4.2.0"
+
+    
+  }
+  
+  {
+    "dependencies": {
+      "express": "^4.21.1",
+      "express-session": "^1.18.1"
+    }
   }
 }
