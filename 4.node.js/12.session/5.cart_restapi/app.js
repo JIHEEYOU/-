@@ -91,12 +91,50 @@ app.get("/api/products", (req, res) => {
 });
 
 app.get("/api/cart", (req, res) => {});
+//중간 미들웨어-로그인 여부를 확인
+function checkLogin(req,res,next){
+    const user=req.session.user;//로그인 한 사용자면? 이게있음
+    if(user){
+        next();//로그인 햇으니 별 문제 없이 이어서 진행
+    }else{
+        res.status(401).json({messa:'로그인이 필요합니다.'});
+    }
+}
 
-app.post("/api/cart", (req, res) => {});
+
+app.post("/api/cart", (req, res) => {
+    const productId=parseInt(req.params.productId)
+    const product = products.find(p=>p.id===productId);
+    if(!product){
+        return res.status(404).json({message:'상품을 찾을 수 없습니다.'})
+    }
+    
+    const cart=req.session.cart || [];
+    cart.push({
+        id:product.id,
+        name:product.name,
+        price:product.price,
+        quantity:1,
+    })
+    req.session.cart=cart;
+    res.json({message:'장바구니 담기 성공',cart});
+});
 
 app.put("/api/cart", (req, res) => {});
 
-app.delete("/api/cart", (req, res) => {});
+app.delete("/api/cart", (req, res) => {
+    const productId=parseInt(req.params.productId);
+    let cart=req.session.cart||[];
+    const itemIndex=cart.findIndex((i)=>i.id===productId);
+    
+    if(itemIndex===-1){
+        return res.status(404).json({message:'상품을 찾을 수 없습니다.'});   
+    }
+    cart=cart.filter((_,index)=> index !== itemIndex);
+    req.session{
+
+    })
+});
 
 // REST-API 들 <--
 

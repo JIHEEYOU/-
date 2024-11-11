@@ -1,3 +1,12 @@
+import{fetch_checkLoginStatus} from './checkuser.js'
+
+document.addEventListener('DOMContentLoaded',()=>{
+    fetch_checkLoginStatus();
+ 
+document.getElementById('login').addEventListener('click',(event)=>{
+    event.preventDefault();
+    login();
+})
 export function checkLoginStatus() {
     return fetch('/api/check-login')
         .then((response) => response.json())

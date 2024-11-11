@@ -12,7 +12,7 @@ const products = [
   { id: 3, name: "오렌지", price: 1500 },
 ];
 
-//정적 폴더를 public으로 정의
+//정적 폴더를 public으로 정의sssss
 //그말인즉 사용자가 route를 요청해서, 그중에서 없으면? 여기를 뒤져서 있는 파일 가져감
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.get("/product", (req, res) => {
+app.get("/api/product", (req, res) => {
   res.json(products);
 });
 
