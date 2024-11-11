@@ -24,7 +24,7 @@ app.use(
   })
 );
 
-app.get("/api/product", (req, res) => {
+app.get("/product", (req, res) => {
   res.json(products);
 });
 

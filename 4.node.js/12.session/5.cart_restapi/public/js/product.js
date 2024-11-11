@@ -46,7 +46,7 @@ function addToCart(productId) {
             .then((data)=>{
                 alert(data.message);
                 if(data.redirectUrl){
-                    window.location.href=data.redirectUr;
+                    window.location.href=data.redirectUrl;
                 }
             });
         }

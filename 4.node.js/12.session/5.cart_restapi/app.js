@@ -120,7 +120,19 @@ app.post("/api/cart", (req, res) => {
     res.json({message:'장바구니 담기 성공',cart});
 });
 
-app.put("/api/cart", (req, res) => {});
+app.put("/api/cart", (req, res) => {
+    const productId=parseInt(req.params.productId);
+    const change=parseInt(req,query.change);
+
+    const cart=req.session.cart || [];
+    const item=dart.find((i)=>i.id===productId);
+    if(!item){
+        return res.status(404).json({message:'상품찾을 수 있다'})
+    }
+    item.quantity=Math.max(1,item.quantity+change);
+    req.session.cart=cart
+    res.json({message:"수량변경성공"})
+});
 
 app.delete("/api/cart", (req, res) => {
     const productId=parseInt(req.params.productId);
@@ -133,7 +145,7 @@ app.delete("/api/cart", (req, res) => {
     cart=cart.filter((_,index)=> index !== itemIndex);
     req.session{
 
-    })
+    }
 });
 
 // REST-API 들 <--

@@ -78,3 +78,13 @@ function updateQuantity(productId,change){
     })
 
 }
+function removeF(productId,change){
+    fetch(`/api/cart/${productId}?change=${change}`,{
+        method:'PUT'
+    })
+    .then((response)=>response.json())
+    .then((data)=>{
+        //업데이트 성공
+    })
+
+}
