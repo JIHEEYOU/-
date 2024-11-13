@@ -17,6 +17,8 @@ db.run(
   "INSERT INTO users (username, email) VALUES (?,?)",
   [newUser.username, newUser.email],
   (err) => {
+    //함수 안에서 this 재생성..
+    //()=>{}람다함수.. this의 scope가 바깥에 있음
     if (err) throw err;
     console.log(
       `삽입 성공: , ${JSON.stringfy(newUser)}, 삽입된 rowID: ${this.lastID}`
@@ -54,7 +56,7 @@ const deleteUser = {
 
 db.run("DELETE FROM users WHERE id = ?", [deleteUser.id], (err) => {
   if (err) throw err;
-  console.log("사용자 조회: ");
+  console.log("사용자 삭제성공");
 });
 
 //모든 사용자 조회
