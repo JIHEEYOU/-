@@ -7,7 +7,7 @@ const path = require("path");
 //내부에서 사용할 변수를 정의
 const app = express();
 const port = 3000;
-const db = new sqlite3.Database("user.db");
+const db = new sqlite3.Database("users.db");
 
 // 세션 초기화
 app.use(
@@ -19,6 +19,7 @@ app.use(
 );
 
 // 미들웨어 등록
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -46,13 +47,8 @@ app.get("/profile-data", (req, res) => {
   }
 
   // 사용자 정보 조회
-  const queryStr = "SELECT * FROM users WHERE username = ?";
+  const queryStr = "SELECT * FROM users WHERE username = ? AND password = ?";
   db.get(queryStr, [username], (err, row) => {
-    if (err) {
-      console.error("프로필 데이터 조회 오류:", err);
-      return res.status(500).json({ error: "데이터 조회 실패" });
-    }
-
     if (row) {
       res.json({
         username: row.username,
@@ -84,7 +80,6 @@ app.post("/login", (req, res) => {
   console.log(username, password);
 
   const queryStr = `SELECT * FROM users WHERE username = ? AND password = ?`;
-  const row = db.prepare(queryStr).get(username, password);
 
   db.get(queryStr, [username, password], (err, row) => {
     if (row) {

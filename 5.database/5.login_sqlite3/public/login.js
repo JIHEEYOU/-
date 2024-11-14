@@ -10,9 +10,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const response = await fetch("/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ username: username, password: password }),
       });
+
+      if (response.redirected) {
+        const data = await response.text();
+        console.log(response.url);
+        window.location.href = response.url;
+      } else {
+        const message = await response.json();
+        document.getElementById("login-message").textContent = data;
+      }
     });
   //fetcg로 login 요청해서 결과받아서
   //실패->이 DOM의 어딘가에 결과를 출력
