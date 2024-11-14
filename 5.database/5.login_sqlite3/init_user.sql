@@ -10,9 +10,9 @@ CREATE TABLE
 
  --초기 사용자 추가
  INSERT INTO users (username,password, email, role )VALUES
- ('admin', 'sfhk#fa2@'),
- ('user1', 'password1');
+ ('admin', 'sfhk#fa2@', 'aa@naver.com','admin'),
+ ('user1', 'password1','bb@naver.com','customer');
 
  INSERT INTO users(username,password,email)VALUES
- ('user2','password2'),
- ('user3','password3')
+ ('user2','password2','cc@naver.com','customer'),
+ ('user3','password3','dd@naver.com','customer')
