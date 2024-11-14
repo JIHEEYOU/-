@@ -89,3 +89,57 @@ app.get("/:table", (req, res) => {
 app.listen(port, () => {
   console.log("서버레디");
 });
+
+app.get("/products", (req, res) => {
+  const { name } = req.query;
+
+  console.log(name);
+
+  if (name) {
+    const query = db.prepare("SELECT * FROM products WHERE name LIKE ?");
+    const rows = query.all(`%${name}%`); //all은 [], get{}
+    console.log(rows);
+
+    res.json(rows);
+  } else {
+    const query = db.prepare(`SELECT * FROM ${db_table}`);
+    const rows = query.all();
+    res.json(rows);
+  }
+});
+
+//매우매우 취약한 코드.. 실무에서 절대 하지 말것
+//브라우저에 /product_weak?name='UNION SELECT * FROMM users--'
+app.get("/products_weak", (req, res) => {
+  const { name } = req.query;
+
+  console.log(name);
+  const queryStr = `SELECT * FROM products WHERE name LIKE '%${name}%'`;
+  const query = db.prepare(queryStr);
+  const rows = query.all();
+  res.json(rows);
+});
+
+app.get("/users", (req, res) => {
+  //여러개 반납
+  try {
+    const users = db.prepare("SELECT * FROM users").all();
+    res.json(users);
+  } catch (err) {
+    res.status(500).send("내부오류");
+  }
+});
+
+app.get("/users/id", (req, res) => {
+  //여러개 반납
+  try {
+    const users = db.prepare("SELECT * FROM users").all();
+    res.json(users);
+  } catch (err) {
+    res.status(500).send("내부오류");
+  }
+});
+
+app.listen(port, () => {
+  console.log("서버레디");
+});

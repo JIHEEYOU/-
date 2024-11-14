@@ -56,7 +56,7 @@ app.put("/users", (req, res) => {
 values.push(userID);
   console.log(fields.join(", "),values);
 
-  db.run(`UPDATE users SET ${fields.join(", ")} WHERE id=?`, [values, (err)=>{
+  db.run(`UPDATE users SET ${fields.join(", ")} WHERE id=?`, [values, (err)]=>{
     if(err){
         console.log(err.message);
         return res.status(500).send('내부오류');
@@ -86,7 +86,7 @@ app.delete("/users", (req, res) => {
   
     //동적으로 이렇게 오는 입력값을 아래의 쿼리문으로 잘 ~~만들려면 어떻게 해야할까?
     //힌트: "username=?,password=?" <--이걸 입력값에 따라서 잘~만들려면?
-    db.run('DELETE FROM users WHERE id=?',[userId, (err)=>{
+    db.run('DELETE FROM users WHERE id=?',[userId, (err)]=>{
         if (err) {
             console.error(err.message);
             return res.status(500).send("내부 오류");
