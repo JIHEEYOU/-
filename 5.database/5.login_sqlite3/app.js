@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require("express-session");
+const SQLiteStore = require("connect-sqlite3")(session);
 const sqlite3 = require("sqlite3");
 const path = require("path");
 //onst fetch = require("node-fetch"); // node-fetch 불러오기
@@ -15,12 +16,15 @@ app.use(
     secret: "my-secret-1234",
     resave: false,
     saveUninitialized: true,
+    store: new SQLiteStore({
+      db: "sessions.db", //내가 원하는 db이름-파일명
+    }),
   })
 );
 
 // 미들웨어 등록
-// app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); //기본 폼 입력값 처리
 app.use(express.static("public"));
 
 // static 폴더 정의
