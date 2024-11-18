@@ -32,10 +32,13 @@ function renderTable(data) {
   //헤더 그리기 tr안에 th그리기
   const headerRow = document.createElement("tr");
   const fileds = Object.keys(data[0]);
+
   fileds.forEach((f) => {
-    const th = document.createElement("th");
-    th.textContent = f;
-    headerRow.appendChild(th);
+    if (f !== "Id" && f !== "Address") {
+      const th = document.createElement("th");
+      th.textContent = f;
+      headerRow.appendChild(th);
+    }
   });
 
   tableHeader.appendChild(headerRow);
@@ -46,11 +49,19 @@ function renderTable(data) {
 
   data.forEach((row) => {
     const bodyRow = document.createElement("tr");
+    bodyRow.addEventListener("click", () => {
+      window.location = `/user/${row.Id}`;
+    });
+
     for (const [key, value] of Object.entries(row)) {
-      const td = document.createElement("td");
-      td.textContent = value;
-      bodyRow.appendChild(td);
+      if (key !== "Id" && key !== "Address") {
+        const td = document.createElement("td");
+        td.textContent = value;
+        bodyRow.appendChild(td);
+      }
     }
     tableBody.appendChild(bodyRow);
   });
 }
+
+fetchUsers(""); //시작할 때는 그냥 빈값으로 검색, 즉 모든 사용자 다 출력
