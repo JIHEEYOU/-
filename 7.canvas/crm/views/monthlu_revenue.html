@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>월간 매출액</title>
   </head>
   <body>
     <h1>월간 매출액</h1>
@@ -12,11 +12,55 @@
         <th>년-월</th>
         <th>해당월 매출액</th>
       </tr>
-      {%for row in rows%}
+      {% for row in rows %}
       <tr>
-        <td>{{row.YearMonth}}</td>
-        <td>{{row.YearMonth}}</td>
+        <td>{{ row.YearMonth }}</td>
+        <td>{{ row.MonthlyRevenue }}</td>
       </tr>
+      {% endfor %}
     </table>
+
+    <canvas id="chart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      // 백엔드에서 JSON 형식으로 안전하게 데이터를 전달받기
+      const chartData = JSON.parse("{{ chart_data|safe }}");
+
+      const labels = chartData.labels; // x축 데이터
+      const revenues = chartData.revenues; // y축 데이터
+
+      console.log(labels); // 디버깅용
+      console.log(revenues); // 디버깅용
+
+      const ctx = document.getElementById("chart").getContext("2d");
+      new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "Monthly Revenue",
+              data: revenues,
+              backgroundColor: "rgba(75, 192, 192, 0.2)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "월간 매출액 차트",
+            },
+          },
+        },
+      });
+    </script>
   </body>
 </html>
