@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>사용자 목록</title>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      th {
+        background-color: #f2f2f2;
+        text-align: left;
+      }
+      .search-bar {
+        margin-bottom: 20px;
+      }
+      .pagination {
+        margin-top: 20px;
+        text-align: center;
+      }
+      .pagination button {
+        margin: 0 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+      .pagination button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>사용자 목록</h1>
+
+    <div class="search-bar">
+      <input type="text" id="search-name" placeholder="이름 검색" />
+      <select id="search-gender">
+        <option value="">성별 선택</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <button id="search-button">검색</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Age</th>
+          <th>Birthdate</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+
+    <!-- 페이징 버튼 및 페이지 수 표시 -->
+    <div class="pagination" id="pagination">
+      <button id="prev-button" disabled>이전</button>
+      <span id="current-page">1</span> / <span id="total-pages">1</span>
+      <button id="next-button">다음</button>
+    </div>
+
+    <script src="/js/users.js"></script>
+  </body>
+</html>
