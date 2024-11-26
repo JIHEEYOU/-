@@ -19,6 +19,7 @@
     <h2 class="text-center my-4">부트스트랩 레이아웃 확인(?)</h2>
     <div class="row">
       <div class="row">
+        <!--해상도가 md(미디윰, 768px보다 크면? 그때 전체 12칸중 4칸을 차지해라 )-->
         <div class="col">1번 열</div>
         <div class="col">2번 열</div>
         <div class="col">3번 열</div>
@@ -39,6 +40,38 @@
         <div class="col">8칸 열</div>
       </div>
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-4" style="background-color: lightblue">4칸 열</div>
+        <div class="col-6" style="background-color: lightgreen">6칸 열</div>
+        <div class="col-8" style="background-color: lightcoral">8칸 열</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 offset-md-4" style="background-color: lightblue">
+          작으면 안보이고, md이상의 해상도에서만 보여짐
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- d=display-->
+        <div class="d-none d-md-block d-md-none">
+          576픽셀보다 크면 이 글자가 보임
+        </div>
+        <div class="d-none d-md-block d-lg-none">
+          768픽셀보다 크면 이 글자가 보임
+        </div>
+        <div class="d-none d-md-block d-xl-none">
+          992픽셀보다 크면 이 글자가 보임
+        </div>
+        <div class="d-none d-md-block">1200픽셀보다 크면 이 글자가 보임</div>
+      </div>
+    </div>
+
     <!--부트스트랩 JS 가져온다-->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
