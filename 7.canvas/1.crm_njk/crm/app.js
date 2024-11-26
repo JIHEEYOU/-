@@ -11,7 +11,7 @@ nunjucks.configure("views", {
   express: app,
 });
 
-app.set("view engine", "njk"); // 눈적스 기본 확장자 njk -> html 로 변경
+app.set("view engine", "njk"); // 눈적스 기본 확장자 njk -> html 로 변경 다시 html에서 njk로 바꿈
 
 app.get("/", (req, res) => {
   const db = new sqlite3.Database("user-sample.db", (err) => {
@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
     `
         SELECT 
             strftime('%Y-%m', "orders"."OrderAt") AS YearMonth,
+            SUM(items.UnitPrice) AS 'Total Revenue', COUNT(*) AS 'Item Count',
             SUM(items.UnitPrice) AS MonthlyRevenue
         FROM 
             "orders"
@@ -52,16 +53,33 @@ app.get("/", (req, res) => {
         // console.log(JSON.stringify(labels));
         // console.log(JSON.stringify(revenues));
 
-        res.render("monthly_revenue", {
-          rows,
+        //프런트가 원하는 데이터 형태로 가공해ㅓㅅ 주면 좋지 않을까?
+        //친절한 김백엔드씨가 데이터를 잘 가공해주겠습니다.
+
+        const labels = [];
+        const revenue = [];
+
+        for (const row of rows) {
+          //우리는 모두 김백엔드씨가 되어서.. 데이터를 가공하면됨
+        }
+        const charData = {
           labels: JSON.stringify(labels),
           revenues: JSON.stringify(revenues),
-        });
+        };
       }
     }
   );
+  //res.json();
 });
 
 app.listen(port, () => {
   console.log("서버 시작");
+});
+
+db.close((err) => {
+  if (err) {
+    console.log("DB닫기 실패.. 왜?", err.message);
+  } else {
+    console.log("DB닫기 성공");
+  }
 });
