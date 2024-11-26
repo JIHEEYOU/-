@@ -9,29 +9,44 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "revenue.html"));
 });
 
+app.get("/gender_dist_data", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "revenue.html"));
+});
+
 app.get("/revenue_data", (req, res) => {
+  //원하는 쿼리문
+  db.all(
     `SELECT 
-    strftime('%Y-%m', "orders"."OrderAt") AS YearMonth,
-    SUM(items.UnitPrice) AS 'Total Revenue', COUNT(*) AS 'Item Count',
-    SUM(items.UnitPrice) AS MonthlyRevenue
-FROM 
-    "orders"
-JOIN 
-    "order_items" ON "orders"."Id" = "order_items"."OrderId"
-JOIN 
-    "items" ON "order_items"."ItemId" = "items"."Id"
-WHERE 
-    "orders"."OrderAt" >= '2023-01-01' AND "orders"."OrderAt" <= '2023-12-31'
-GROUP BY 
-    strftime('%Y-%m', "orders"."OrderAt")
-ORDER BY 
-    strftime('%Y-%m', "orders"."OrderAt")
-`
-    [],(err, rows) => {
+    CASE
+            WHEN age BETWEEN 10 AND 19 as 10대
+            WHEN age BETWEEN 20 AND 29 as 20대
+            WHEN age BETWEEN 30 AND 39 as 30대
+            WHEN age BETWEEN 40 AND 49 as 40대
+            WHEN age BETWEEN 50 AND 59 as 50대
+            WHEN age >= 60대 THEN '60대 이상'
+        END AS AgeGroup,
+        Gender,
+        COUNT(*) AS UserCount
+    FROM users
+    GROUP BY AgeGroup,Gender;`,
+    [],
+    (err, rows) => {
       if (err) {
         console.error("쿼리 실패!!");
       } else {
         console.log(rows);
+
+        //TODO 우리의 코드로 아래 내용 만든다 숙제..!!
+        //데이터를 가공... 원하는 걸로...
+        //labels:['10대', '20대', '30대', '40대', '50대']
+        //maleCount:[100,124,128,107,29]
+        //femaleCount:[101,135,126,117,33]
+
+        const charData={
+            labels:['10대', '20대', '30대', '40대', '50대']
+            maleCount:[100,124,128,107,29]
+            femaleCount:[101,135,126,117,33]
+        }
 
         // console.log(JSON.stringify(labels));
         // console.log(JSON.stringify(revenues));
@@ -49,17 +64,17 @@ ORDER BY
         }
         const charData = {
           labels: labels,
-          revenues:revenues,
+          revenues: revenues,
         };
-        
-        res.json(charData);
-    }
- 
-});
 
-app.listen(port, () => {
-  console.log("서버 시작");
-});
+        res.json(charData);
+      }
+    }
+  );
+
+  app.listen(port, () => {
+    console.log("서버 시작");
+  });
   res.json();
 });
 
