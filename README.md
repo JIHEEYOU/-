@@ -1,3 +1,3 @@
 # SESAC_JS_Study
 
-🌱SESAC_JS Study 공부저장소 입니다!🌳
+🌱새싹 자바스크립트 공부저장소 입니다!🌳
