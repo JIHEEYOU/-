@@ -24,8 +24,7 @@ app.get("/", (req, res) => {
 
   // 원하는 쿼리문
   db.all(
-    `
-        SELECT 
+    `SELECT 
             strftime('%Y-%m', "orders"."OrderAt") AS YearMonth,
             SUM(items.UnitPrice) AS 'Total Revenue', COUNT(*) AS 'Item Count',
             SUM(items.UnitPrice) AS MonthlyRevenue
@@ -47,7 +46,9 @@ app.get("/", (req, res) => {
       if (err) {
         console.error("쿼리 실패!!");
       } else {
-        // console.log(rows);
+        console.log(rows);
+
+
         const labels = rows.map((row) => row.YearMonth);
         const revenues = rows.map((row) => row.MonthlyRevenue);
         // console.log(JSON.stringify(labels));
