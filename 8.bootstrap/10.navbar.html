@@ -9,8 +9,8 @@
     />
     <title>Document</title>
   </head>
-  <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark navbar-expand-lg  ">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button
@@ -45,8 +45,8 @@
                 Dropdown
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">나의메뉴1</a></li>
-                <li><a class="dropdown-item" href="#">나의메뉴2</a></li>
+                <li><a class="dropdown-item" href="#">&laquo;</a></li>
+                <li><a class="dropdown-item" href="#">1</a></li>
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#">나의메뉴3</a></li>
               </ul>
@@ -71,9 +71,9 @@
     </nav>
 
     <!--테이블생성-->
-    <div class="container mt -4">
+    <div class="bg-dark container mt -4">
         <h2>기본 테이블</h2>
-        <table class="table table-light table-bordered border-success table-hover warning">
+        <table class=" table table-dark tatable-bordered border-success table-hover warning ">
             <thead>
                 <tr>
                     <th>컬럼1</th><th>컬럼2</th><th>컬럼3</th>
@@ -98,6 +98,30 @@
     <!--pagination 추가-->
     <nav arta-label="page">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </bo
->dy>
+    <script>
+        //버튼 이벤트를 추가해서, 해당 버튼 클릭시 /dark/light class 속성 추가/삭제
+        const themeToggleBtn=document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click',()=>{
+            const isDarkMode = document.body.classList.contains('bg-dark');
+
+
+            document.body.classList.toggle('bg-dark', !isDarkMode);
+
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('navbar-light',isDarkMode);
+            navbar.classList.toggle('navbar-dark',!isDarkMode);
+
+            const table = document.querySelector('.table');
+            navbar.classList.toggle('table-light',isDarkMode);
+            navbar.classList.toggle('table-dark',!isDarkMode);
+
+            const pageLinks=document.querySelectorAll('.page-link');
+            pageLinks.forEach(link=>{
+                link.classList.toggle('bg-dark',!isDarkMode);
+                link.classList.toggle('text-dark',!isDarkMode);
+            })
+            themeToggleBtn.textContent=isDarkMode ? 'Switch to 다크모드뿅':'라이트뿅';
+        })
+    </script>    
+</body>
 </html>
